@@ -95,6 +95,17 @@ function togglePause(){
 document.addEventListener('keydown', e=>{
   if(e.code==='Space'){ e.preventDefault(); togglePause(); }
 });
+document.getElementById('game-screen').addEventListener('click', e=>{
+  if(!devMode) return;
+  if(e.target.closest('.game-card') || e.target.closest('button')) return;
+  togglePause();
+});
+document.getElementById('game-screen').addEventListener('touchstart', e=>{
+  if(!devMode) return;
+  if(e.target.closest('.game-card') || e.target.closest('button')) return;
+  e.preventDefault();
+  togglePause();
+},{passive:false});
 
 // ── 倒數 ──
 function startCountdown(isNewRound){
@@ -192,8 +203,7 @@ function startPoll(){
     // 離開上一個 fruit phase 時，檢查有沒有按到
     if(lastPhaseIdx !== -1 && TIMELINE[lastPhaseIdx].type === 'fruit'){
       if(currentLayout && currentLayout.hasAnswer && !phaseTapped){
-        triggerGameOver('超時！沒有按到正確的水果');
-        return;
+        if(!devMode){ triggerGameOver('超時！沒有按到正確的水果'); return; }
       }
     }
 
