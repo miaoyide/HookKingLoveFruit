@@ -70,7 +70,10 @@ body::before{content:'';position:fixed;inset:0;
   letter-spacing:.04em;color:var(--gold);font-family:'Courier New',monospace;}
 #timer-display .ms{font-size:1rem;color:rgba(255,209,102,.6);}
 .timer-label{font-size:.65rem;color:var(--dim);letter-spacing:.12em;text-transform:uppercase;margin-right:4px;}
-#gameover-screen{animation:fadeIn .4s ease;}
+#gameover-screen{display:none;}
+#gameover-screen.active{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  position:fixed;inset:0;z-index:80;background:var(--bg);padding:20px;overflow-y:auto;
+  animation:fadeIn .4s ease;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 .result-icon{font-size:4rem;margin-bottom:16px;}
 #gameover-screen h2{font-size:2.5rem;font-weight:900;color:var(--accent);margin-bottom:8px;}

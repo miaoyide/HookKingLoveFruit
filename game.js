@@ -38,6 +38,7 @@ const bgm = document.getElementById('bgm');
 // ── 工具 ──
 function showScreen(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('gameover-screen').classList.remove('active');
   document.getElementById(id).classList.add('active');
 }
 function showGameScreen(){
@@ -119,6 +120,7 @@ function startGame(){
   if(round===startRound){ score=0; fruitSeqIdx=0; lastAppleTapped=false; }
   seamlessTriggered=false;
   document.getElementById('next-round-hint').classList.remove('active');
+  document.getElementById('tap-feedback').classList.remove('show');
   document.getElementById('card-area').style.display='';
   gameActive=true; paused=false;
   lastPhaseIdx=-1; currentPhase=null; phaseTapped=false;
@@ -358,11 +360,17 @@ function onCardTap(cardEl, isAnswer, hasAnswer){
 }
 
 // ── Game Over ──
-function triggerGameOver(_reason){
+function triggerGameOver(reason){
   if(!gameActive) return;
   if(devMode) return; // 開發者模式：無敵，忽略所有死亡
   stopAll();
-  showScreen('start-screen');
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('result-icon').textContent='💀';
+  document.querySelector('#gameover-screen h2').textContent='GAME OVER';
+  document.getElementById('fail-reason').textContent=reason;
+  document.getElementById('final-score').textContent=score;
+  document.getElementById('final-rounds').textContent='下次再來！加油 💪';
+  document.getElementById('gameover-screen').classList.add('active');
 }
 
 // ── 結束一輪 ──
@@ -384,7 +392,8 @@ function endRound(){
     document.getElementById('fail-reason').textContent='';
     document.getElementById('result-icon').textContent='🏆';
     document.querySelector('#gameover-screen h2').textContent='CLEAR!';
-    showScreen('gameover-screen');
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    document.getElementById('gameover-screen').classList.add('active');
   } else {
     // 顯示下一關按鈕
     document.getElementById('card-area').style.display='none';
