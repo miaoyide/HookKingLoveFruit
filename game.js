@@ -1,15 +1,15 @@
 const TIMELINE = [
   { type:'king',   start:0,     end:11.0  },
   { type:'rapper', start:11.1,  end:12.59 },
-  { type:'fruit', start:12.6,  end:13.49, fruit:0 }, // 橘子
-  { type:'fruit', start:13.5,  end:14.09, fruit:1 }, // 西瓜
-  { type:'fruit', start:14.1,  end:14.74, fruit:2 }, // 荔枝
-  { type:'fruit', start:14.75, end:15.39, fruit:3 }, // 蘋果
+  { type:'fruit', start:12.6,  end:13.29, fruit:0 }, // 橘子
+  { type:'fruit', start:13.3,  end:13.99, fruit:1 }, // 西瓜
+  { type:'fruit', start:14,  end:14.65, fruit:2 }, // 荔枝
+  { type:'fruit', start:14.66, end:15.39, fruit:3 }, // 蘋果
   { type:'rapper', start:16.2,  end:17.59 },
   { type:'fruit', start:17.6,  end:18.46, fruit:0 }, // 橘子
   { type:'fruit', start:18.47, end:19.19, fruit:1 }, // 西瓜
-  { type:'fruit', start:19.2,  end:19.94, fruit:2 }, // 荔枝
-  { type:'fruit', start:19.95, end:20.59, fruit:3 }, // 蘋果
+  { type:'fruit', start:19.2,  end:19.89, fruit:2 }, // 荔枝
+  { type:'fruit', start:19.90, end:20.59, fruit:3 }, // 蘋果
   { type:'king',  start:20.6,  end:22.99 },
 ];
 const FRUITS = [
@@ -97,12 +97,12 @@ document.addEventListener('keydown', e=>{
 });
 document.getElementById('game-screen').addEventListener('click', e=>{
   if(!devMode) return;
-  if(e.target.closest('.game-card') || e.target.closest('button')) return;
+  if(e.target.closest('.game-card') || e.target.closest('button') || e.target.closest('#dev-bar-wrap')) return;
   togglePause();
 });
 document.getElementById('game-screen').addEventListener('touchstart', e=>{
   if(!devMode) return;
-  if(e.target.closest('.game-card') || e.target.closest('button')) return;
+  if(e.target.closest('.game-card') || e.target.closest('button') || e.target.closest('#dev-bar-wrap')) return;
   e.preventDefault();
   togglePause();
 },{passive:false});
