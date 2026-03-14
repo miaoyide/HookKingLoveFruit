@@ -10,7 +10,7 @@ const TIMELINE = [
   { type:'fruit', start:18.47, end:19.19, fruit:1 }, // 西瓜
   { type:'fruit', start:19.2,  end:19.94, fruit:2 }, // 荔枝
   { type:'fruit', start:19.95, end:20.59, fruit:3 }, // 蘋果
-  { type:'king',  start:20.6,  end:24.99 },
+  { type:'king',  start:20.6,  end:22.99 },
 ];
 const FRUITS = [
   { label:'橘子', emoji:'🍊' },
@@ -20,7 +20,7 @@ const FRUITS = [
 ];
 const RATES = [1, 1.25, 1.5];   // 3 關
 const BPM   = 120;
-const ROUND_DURATION = 24.99;
+const ROUND_DURATION = 22.99;
 const MAX_ROUND = 3;
 
 let score=0, round=1, startRound=1, rate=1.0, gameActive=false, paused=false;
