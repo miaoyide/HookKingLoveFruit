@@ -15,7 +15,7 @@ const TIMELINE = [
 const FRUITS = [
   { label:'橘子', emoji:'🍊' },
   { label:'西瓜', emoji:'🍉' },
-  { label:'荔枝', emoji:'🍈' },
+  { label:'荔枝', emoji:'🍒' },
   { label:'蘋果', emoji:'🍎' },
 ];
 const RATES = [1, 1.25, 1.5];   // 3 關
