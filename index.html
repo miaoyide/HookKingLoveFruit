@@ -61,9 +61,11 @@
     </div>
     <div id="card-area"></div>
     <div id="next-round-hint">
-      <div class="hint-text">🎉 準備好了嗎？</div>
-      <div class="hint-sub">即將進入下一關</div>
+      <div class="hint-text" id="hint-title">🎉 第 1 關完成！</div>
+      <div class="hint-sub">準備好了嗎？</div>
+      <button class="btn-next-round" onclick="goNextRound()">前往下一關 →</button>
     </div>
+    <div id="tap-feedback"></div>
     <div id="dev-realtime">bgm: <span id="dev-bgm-t">0.000</span>s｜rawT: <span id="dev-raw-t">0.000</span>s｜rate: <span id="dev-rate">1</span>x</div>
     <div id="dev-bar-wrap">
       <div id="dev-bar-label">

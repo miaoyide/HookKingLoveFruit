@@ -176,33 +176,6 @@ function startPoll(){
     updateDevBar();
     const bgmT = bgm.currentTime; // 直接用 bgm 時間比對 TIMELINE
 
-    // bgm 21 秒後，若蘋果已按到，顯示提示
-    if(bgmT >= 21 && lastAppleTapped && !seamlessTriggered && round < MAX_ROUND){
-      seamlessTriggered = true;
-      document.getElementById('card-area').style.display='none';
-      document.getElementById('next-round-hint').classList.add('active');
-    }
-
-    // bgm 24 秒：無縫切換到下一關
-    if(bgmT >= 24 && seamlessTriggered && round < MAX_ROUND){
-      const nextRound = round + 1;
-      const nextRate  = RATES[nextRound - 1];
-      // seek 回 0 並切換速度
-      bgm.playbackRate = nextRate;
-      bgm.currentTime  = 0;
-      // 重置狀態
-      round = nextRound;
-      rate  = nextRate;
-      fruitSeqIdx = 0;
-      lastPhaseIdx = -1; currentPhase = null;
-      phaseTapped = false; currentLayout = null;
-      lastAppleTapped = false; seamlessTriggered = false;
-      updateHUD();
-      // 隱藏提示，恢復卡片區
-      document.getElementById('next-round-hint').classList.remove('active');
-      document.getElementById('card-area').style.display='';
-    }
-
     if(bgmT >= ROUND_DURATION){
       clearInterval(pollTimer);
       endRound();
@@ -371,6 +344,10 @@ function onCardTap(cardEl, isAnswer, hasAnswer){
     clearTimeout(fruitTimer);
     cardEl.classList.add('flash-good');
     score+=30; updateHUD();
+    // 顯示正確回饋
+    const fb=document.getElementById('tap-feedback');
+    fb.textContent='✓ 正確！';
+    fb.classList.remove('show'); fb.offsetHeight; fb.classList.add('show');
     // 第二次蘋果（TIMELINE idx 9）按到 → 記錄
     if(lastPhaseIdx === 9) lastAppleTapped=true;
   } else {
