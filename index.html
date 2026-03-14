@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>鐮刀王愛吃水果</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<audio id="bgm" preload="auto" crossorigin="anonymous">
+  <source src="https://miaoyide.github.io/TurkeyBurger/music.mp3" type="audio/mpeg">
+</audio>
+<div id="tap-ripple"></div>
+<div id="pause-overlay">
+  <h2>⏸ 暫停</h2>
+  <p>按 Space 繼續</p>
+  <div id="dev-round-select" style="display:none;margin-top:14px;display:none;flex-direction:column;gap:8px;align-items:center;">
+    <div style="font-size:.7rem;color:var(--dim);letter-spacing:.1em;">跳到指定關卡</div>
+    <div style="display:flex;gap:8px;">
+      <button class="btn-round" style="padding:8px 14px;font-size:.85rem;" onclick="selectRound(1)">第 1 關</button>
+      <button class="btn-round" style="padding:8px 14px;font-size:.85rem;" onclick="selectRound(2)">第 2 關</button>
+      <button class="btn-round" style="padding:8px 14px;font-size:.85rem;" onclick="selectRound(3)">第 3 關</button>
+    </div>
+  </div>
+  <button onclick="devGoHome()" style="margin-top:12px;background:none;border:1px solid rgba(255,255,255,.15);border-radius:8px;color:var(--dim);font-family:inherit;font-size:.8rem;padding:7px 18px;cursor:pointer;">← 回首頁</button>
+</div>
+<div id="countdown-overlay">
+  <div id="countdown-num">3</div>
+  <p id="countdown-msg">準備好了嗎？</p>
+</div>
+<div id="app">
+  <div id="start-screen" class="screen active">
+    <h1>🎵 鐮刀王<br>愛吃水果</h1>
+    <p class="subtitle">節奏反應挑戰</p>
+    <div class="lyric-preview">
+      <span class="fruit">🍊 橘子</span>
+      <span class="fruit">🍉 西瓜</span>
+      <span class="fruit">🍈 荔枝</span>
+      <span class="fruit">🍎 蘋果</span>
+    </div>
+    <div class="rules">
+      <h3>遊戲規則</h3>
+      <ul>
+        <li><span class="icon">🍊</span>聆聽歌詞並點擊正確的水果</li>
+        <li><span class="icon">⚡</span>1x → 1.25x → 1.5x</li>
+      </ul>
+    </div>
+    <button class="btn-start" onclick="selectRound(1)">開始遊戲</button>
+    <button id="btn-devmode" onclick="toggleDevMode()">🛠 開發者模式</button>
+  </div>
+  <div id="game-screen" class="screen">
+    <div class="hud">
+      <div>
+        <div class="score-label">分數</div>
+        <div class="score-display" id="score-display">0</div>
+      </div>
+      <div class="round-display">
+        <div class="round-num" id="round-display">第 1 關</div>
+        <div class="speed-badge" id="speed-badge">1x</div>
+      </div>
+    </div>
+    <div id="card-area"></div>
+    <div id="next-round-hint">
+      <div class="hint-text">🎉 準備好了嗎？</div>
+      <div class="hint-sub">即將進入下一關</div>
+    </div>
+    <div id="dev-realtime">bgm: <span id="dev-bgm-t">0.000</span>s｜rawT: <span id="dev-raw-t">0.000</span>s｜rate: <span id="dev-rate">1</span>x</div>
+    <div id="dev-bar-wrap">
+      <div id="dev-bar-label">
+        <span>🛠 測試進度條</span>
+        <span id="dev-time-label">0.00s / 24.99s</span>
+      </div>
+      <div id="dev-bar-track">
+        <div id="dev-bar-fill"></div>
+        <input type="range" id="dev-bar-range" min="0" max="2499" value="0" step="1"/>
+      </div>
+    </div>
+  </div>
+  <div id="gameover-screen" class="screen">
+    <div class="result-icon">💀</div>
+    <h2>GAME OVER</h2>
+    <p style="color:var(--dim);font-size:.9rem" id="fail-reason"></p>
+    <div class="final-score-wrap">
+      <div class="final-score-label">最終分數</div>
+      <div class="final-score-num" id="final-score">0</div>
+      <div class="final-rounds" id="final-rounds"></div>
+    </div>
+    <button class="btn-start" onclick="showScreen('start-screen')">回首頁</button>
+  </div>
+</div>
+<script src="game.js"></script>
+</body>
+</html>
