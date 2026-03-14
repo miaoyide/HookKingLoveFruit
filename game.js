@@ -386,15 +386,24 @@ function endRound(){
     document.querySelector('#gameover-screen h2').textContent='CLEAR!';
     showScreen('gameover-screen');
   } else {
-    // 無縫換關沒觸發（devMode 跳過蘋果）→ 傳統換關
-    round++;
-    rate = RATES[Math.min(round-1, RATES.length-1)];
-    fruitSeqIdx = 0;
-    lastPhaseIdx=-1; currentPhase=null; phaseTapped=false; currentLayout=null;
-    lastAppleTapped=false; seamlessTriggered=false;
-    updateHUD();
-    startCountdown(true);
+    // 顯示下一關按鈕
+    document.getElementById('card-area').style.display='none';
+    document.getElementById('hint-title').textContent='🎉 第 '+round+' 關完成！';
+    document.getElementById('next-round-hint').classList.add('active');
   }
+}
+
+// ── 前往下一關 ──
+function goNextRound(){
+  document.getElementById('next-round-hint').classList.remove('active');
+  document.getElementById('card-area').style.display='';
+  round++;
+  rate = RATES[Math.min(round-1, RATES.length-1)];
+  fruitSeqIdx=0;
+  lastPhaseIdx=-1; currentPhase=null; phaseTapped=false; currentLayout=null;
+  lastAppleTapped=false; seamlessTriggered=false;
+  updateHUD();
+  startCountdown(true);
 }
 
 // ── HUD ──
